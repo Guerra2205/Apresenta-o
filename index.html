@@ -2,374 +2,604 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Página</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guilherme Lins Guerra</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #cacdf5;
-}
+  :root {
+    --bg: #12151c;
+    --surface: #1a1e28;
+    --surface-2: #20242f;
+    --border: #2b3040;
+    --text: #eef1f6;
+    --text-muted: #9aa3b6;
+    --accent: #ff9f45;
+    --accent-dim: #6b4c2c;
+    --trace: #5eead4;
+    --radius-s: 4px;
+    --radius-m: 10px;
+  }
 
-.divzona {
-  padding: 40px;
-}
+  * { box-sizing: border-box; }
 
-.txt-azul {
-  color: #2b4c7e;
-}
+  body {
+    margin: 0;
+    font-family: 'Inter', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
 
-.BOX {
-  background: white;
-  padding: 20px;
-  margin: 10px;
-  border-radius: 6px;
-}
+  h1, h2, h3, .display {
+    font-family: 'Sora', 'Inter', Arial, sans-serif;
+  }
 
-.card1,
-.card_2,
-.Card3 {
-  border: 1px solid #ccc;
-  padding: 15px;
-}
+  a { color: inherit; }
 
-.botao {
-  background: #234d9b;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
 
-  font-size: 13px;
-  text-decoration: none;
-  display: inline-block;
-}
+  section { scroll-margin-top: 90px; }
 
-.rodape {
-  background: #22254a;
-  color: white;
-  padding: 30px;
-  text-align: center;
-}
+  ::selection { background: var(--accent); color: #14161c; }
+
+  /* NAV */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(18, 21, 28, 0.86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-mark {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+  }
+  .nav-mark span { color: var(--accent); }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-links li {
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-muted);
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.2s ease;
+  }
+  .nav-links li::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: 0;
+    height: 1.5px;
+    width: 0;
+    background: var(--accent);
+    transition: width 0.25s ease;
+  }
+  .nav-links li:hover { color: var(--text); }
+  .nav-links li:hover::after { width: 100%; }
+
+  @media (max-width: 720px) {
+    .nav-links { display: none; }
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    padding: 110px 0 100px;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  @media (max-width: 800px) {
+    .hero-grid { grid-template-columns: 1fr; }
+  }
+
+  .eyebrow-line {
+    font-size: 13px;
+    color: var(--trace);
+    font-family: 'Sora', sans-serif;
+    margin-bottom: 18px;
+    opacity: 0;
+    animation: rise 0.6s ease forwards;
+    animation-delay: 0.05s;
+  }
+
+  .hero h1 {
+    font-size: clamp(34px, 5vw, 54px);
+    font-weight: 800;
+    line-height: 1.08;
+    margin: 0 0 20px;
+    opacity: 0;
+    animation: rise 0.7s ease forwards;
+    animation-delay: 0.15s;
+  }
+
+  .hero p {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 480px;
+    margin: 0 0 32px;
+    opacity: 0;
+    animation: rise 0.7s ease forwards;
+    animation-delay: 0.28s;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: rise 0.7s ease forwards;
+    animation-delay: 0.4s;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .btn {
+    border: none;
+    border-radius: 999px;
+    padding: 12px 26px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #1a1206;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -8px rgba(255, 159, 69, 0.55);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* circuit board svg */
+  .circuit-wrap {
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 0.5s;
+  }
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  .circuit-wrap svg { width: 100%; height: auto; }
+  .trace {
+    fill: none;
+    stroke: var(--trace);
+    stroke-width: 1.4;
+    opacity: 0.55;
+    stroke-dasharray: 6 5;
+    animation: dash 18s linear infinite;
+  }
+  .node {
+    fill: var(--accent);
+    animation: pulse 2.6s ease-in-out infinite;
+  }
+  @keyframes dash { to { stroke-dashoffset: -400; } }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; r: 3.2; }
+    50% { opacity: 1; r: 4.4; }
+  }
+
+  /* SECTION HEADS */
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+  .section-head .idx {
+    font-family: 'Sora', sans-serif;
+    color: var(--accent-dim);
+    font-size: 14px;
+  }
+  .section-head h2 {
+    font-size: 26px;
+    margin: 0;
+  }
+
+  section.pad { padding: 90px 0; }
+  section.pad + section.pad { border-top: 1px solid var(--border); }
+
+  /* SOBRE */
+  .sobre-body {
+    color: var(--text-muted);
+    line-height: 1.75;
+    font-size: 16px;
+    max-width: 620px;
+  }
+  .chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+  }
+  .chip {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-muted);
+    font-size: 13px;
+    padding: 7px 14px;
+    border-radius: 999px;
+  }
+
+  /* PROJETOS */
+  .proj-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+  }
+  .proj-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    padding: 26px;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .proj-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-dim);
+  }
+  .proj-tag {
+    font-size: 12px;
+    color: var(--trace);
+    margin-bottom: 14px;
+    display: block;
+  }
+  .proj-card h3 {
+    font-size: 19px;
+    margin: 0 0 10px;
+  }
+  .proj-card p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0 0 18px;
+  }
+  .proj-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .proj-link .arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+  .proj-link:hover .arrow { transform: translateX(4px); }
+
+  /* QUALIFICAÇÕES */
+  .quali-list { display: flex; flex-direction: column; gap: 0; }
+  .quali-item {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 24px;
+    padding: 22px 0;
+    border-top: 1px solid var(--border);
+  }
+  .quali-item:last-child { border-bottom: 1px solid var(--border); }
+  .quali-time {
+    font-size: 13px;
+    color: var(--accent);
+    font-family: 'Sora', sans-serif;
+  }
+  .quali-item h3 {
+    font-size: 16px;
+    margin: 0 0 6px;
+  }
+  .quali-item p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* CONTATO */
+  .contact-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    padding: 40px;
+    max-width: 520px;
+  }
+  label {
+    display: block;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    margin-top: 18px;
+  }
+  label:first-of-type { margin-top: 0; }
+  input, textarea {
+    width: 100%;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-s);
+    padding: 11px 13px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  input:focus, textarea:focus { border-color: var(--accent); }
+  textarea { height: 96px; resize: vertical; }
+
+  .send-status {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--trace);
+    min-height: 18px;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0;
+  }
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-inner p {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin: 0;
+  }
+  .foot-links { display: flex; gap: 18px; }
+  .foot-links a {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .foot-links a:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .quali-item { grid-template-columns: 1fr; gap: 6px; }
+    .contact-box { padding: 26px; }
+  }
 </style>
 </head>
 
 <body>
 
-<!-- MENU -->
-<div class="divzona"
-     style="display:flex; justify-content:space-between; align-items:center; background:white;">
-
-  <div style="font-weight:bold; font-size:20px;">
-  
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-mark">GLG<span>.</span></div>
+    <ul class="nav-links">
+      <li onclick="irPara('hero')">Início</li>
+      <li onclick="irPara('sobre')">Sobre</li>
+      <li onclick="irPara('projetos')">Projetos</li>
+      <li onclick="irPara('quali')">Qualificações</li>
+      <li onclick="irPara('contato')">Contato</li>
+    </ul>
   </div>
-
-  <div style="display:flex; gap:20px;">
-    <div onclick="irPara('hero')" style="cursor:pointer;">Inicio</div>
-    <div onclick="irPara('sobre')" style="cursor:pointer;">Sobre</div>
-    <div onclick="irPara('projetos')" style="cursor:pointer;">Projetos</div>
-    <div onclick="irPara('quali')" style="cursor:pointer;">Qualificações</div>
-    <div onclick="irPara('depo')" style="cursor:pointer;">Depoimentos</div>
-    <div onclick="irPara('contato')" style="cursor:pointer;">Contato</div>
-  </div>
-
-</div>
-
+</nav>
 
 <!-- HERO -->
-<div id="hero"
-     class="divzona"
-     style="text-align:center; padding-top:80px; padding-bottom:80px;">
+<section id="hero" class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow-line">Sistemas de Informação · Uninassau Olinda</div>
+      <h1>Guilherme Lins Guerra</h1>
+      <p>
+        Gosto de entender como as coisas funcionam por dentro — do código
+        que roda um sistema ao hardware que faz ele rodar. Curioso por
+        tecnologia, aprendendo na prática e construindo projetos no caminho.
+      </p>
+      <div class="cta-row">
+        <button class="btn btn-primary" onclick="irPara('projetos')">Ver projetos</button>
+        <a class="btn btn-ghost" href="curriculo.pdf" download>Baixar CV</a>
+      </div>
+    </div>
 
-  <img
-    src="https://placehold.co/130x130"
-    style="border-radius:50%;"
-    alt="Foto de perfil"
-  >
-
-  <div
-    class="txt-azul"
-    style="font-size:44px; font-weight:bold; margin-top:20px;">
-    Guilherme Lins Guerra
+    <div class="circuit-wrap">
+      <svg viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg">
+        <path class="trace" d="M20 40 H120 V90 H220 V40 H300"/>
+        <path class="trace" d="M20 130 H90 V180 H180 V220 H300" style="animation-delay:-4s"/>
+        <path class="trace" d="M40 20 V230" style="animation-delay:-9s"/>
+        <path class="trace" d="M260 10 V250" style="animation-delay:-13s"/>
+        <circle class="node" cx="120" cy="40" r="3.5"/>
+        <circle class="node" cx="220" cy="90" r="3.5" style="animation-delay:-1s"/>
+        <circle class="node" cx="90" cy="130" r="3.5" style="animation-delay:-2s"/>
+        <circle class="node" cx="180" cy="180" r="3.5" style="animation-delay:-0.5s"/>
+        <circle class="node" cx="40" cy="130" r="3.5" style="animation-delay:-1.6s"/>
+        <circle class="node" cx="260" cy="130" r="3.5" style="animation-delay:-2.4s"/>
+      </svg>
+    </div>
   </div>
-
-  <div style="font-size:18px; color:#555; margin-top:10px;">
-    Estudante de Sistemas de Informação, interessado em aprender
-     novas tecnologias e desenvolver minhas habilidades na área de TI.
-  </div>
-
-  <br>
-
-  <button class="botao" onclick="clicouBotao()">
-    Ver projetos
-  </button>
-
-  <button
-    class="botao"
-    style="background:#2b4c7e;"
-    onclick="clicouBotao()">
-    Baixar CV
-  </button>
-
-</div>
-
+</section>
 
 <!-- SOBRE -->
-<div id="sobre" class="divzona BOX">
-
-  <h3 style="font-size:30px;">
-    sobre mim
-  </h3>
-
-  <div style="color:#444; line-height:1.6; max-width:700px;">
-    Sou estudante de Sistemas de Informação e busco desenvolver
-    cada vez mais meus conhecimentos na área de tecnologia.
-    Tenho interesse em desenvolvimento de sistemas, suporte,
-    infraestrutura e novas tecnologias, buscando aplicar na
-    prática os conhecimentos adquiridos durante minha formação.
+<section id="sobre" class="pad">
+  <div class="wrap">
+    <div class="section-head"><span class="idx">01</span><h2>Sobre mim</h2></div>
+    <div class="sobre-body">
+      Sou estudante de Sistemas de Informação e busco desenvolver cada vez
+      mais meus conhecimentos na área de tecnologia. Tenho interesse em
+      desenvolvimento de sistemas, suporte, infraestrutura e hardware,
+      e gosto de colocar em prática o que aprendo na faculdade montando
+      e otimizando meus próprios projetos.
+    </div>
+    <div class="chip-row">
+      <span class="chip">Lógica de programação</span>
+      <span class="chip">Redes</span>
+      <span class="chip">Front-end</span>
+      <span class="chip">Suporte e hardware</span>
+      <span class="chip">Java</span>
+      <span class="chip">Angular</span>
+    </div>
   </div>
-
-</div>
-
+</section>
 
 <!-- PROJETOS -->
-<div id="projetos" class="divzona">
+<section id="projetos" class="pad">
+  <div class="wrap">
+    <div class="section-head"><span class="idx">02</span><h2>Projetos que eu fiz</h2></div>
+    <div class="proj-grid">
 
-  <h2 class="txt-azul">
-    projetos que eu fiz
-  </h2>
-
-  <div style="display:flex; gap:20px; flex-wrap:wrap;">
-
-    <div class="card1 BOX" style="width:250px;">
-      <img src="https://placehold.co/250x140" alt="Sistema de Estoque">
-
-      <div style="font-weight:bold; margin-top:10px;">
-        E-Commerce Sustentável
+      <div class="proj-card">
+        <span class="proj-tag">Java · HTML · CSS</span>
+        <h3>E-Commerce Sustentável</h3>
+        <p>E-commerce focado em venda de produtos sustentáveis, do catálogo ao carrinho de compras.</p>
+        <a class="proj-link" href="https://github.com/vnzix/EECUTY" target="_blank">ver mais <span class="arrow">→</span></a>
       </div>
 
-      <div style="font-size:14px; color:#666;">
-        E-Commerce focado em venda de produtos sustentáveis desenvolvido em Java, HTML, CSS.
+      <div class="proj-card">
+        <span class="proj-tag">Angular</span>
+        <h3>AngularCoin</h3>
+        <p>Aplicação web desenvolvida em Angular para facilitar a conversão de moedas de forma rápida e intuitiva.</p>
+        <a class="proj-link" href="https://github.com/Guerra2205/AngularCoin" target="_blank">ver mais <span class="arrow">→</span></a>
       </div>
 
-      <button class="botao" onclick="clicouBotao()">
-        ver mais
-      </button>
     </div>
-
-
-    <div class="card_2 BOX" style="width:250px;">
-      <img src="https://placehold.co/250x140" alt="App de Receitas">
-
-      <div style="font-weight:bold; margin-top:10px;">
-        AngularCoin
-      </div>
-
-      <div style="font-size:14px; color:#666;">
-        O AngularCoin é uma aplicação web desenvolvida em Angular com o objetivo de facilitar a conversão de moedas de forma rápida e intuitiva.
-      </div>
-
-      <button class="botao" onclick="clicouBotao()">
-        ver mais
-      </button>
-    </div>
-
-
-    
-    </div>
-
   </div>
-</div>
-
+</section>
 
 <!-- QUALIFICAÇÕES -->
-<div id="quali" class="divzona" style="background:white;">
+<section id="quali" class="pad">
+  <div class="wrap">
+    <div class="section-head"><span class="idx">03</span><h2>Qualificações</h2></div>
+    <div class="quali-list">
 
-  <div
-    class="txt-azul"
-    style="font-size:28px; font-weight:bold;">
-    Qualificações
+      <div class="quali-item">
+        <div class="quali-time">Cursando</div>
+        <div>
+          <h3>Bacharelado em Sistemas de Informação — Uninassau Olinda</h3>
+          <p>Carga horária de 3.200 horas, com foco em lógica de programação e redes.</p>
+        </div>
+      </div>
+
+      <div class="quali-item">
+        <div class="quali-time">32 horas</div>
+        <div>
+          <h3>Manutenção de Hardware — Sistema ESTEAM</h3>
+          <p>Curso focado em manutenção e suporte de hardware e periféricos.</p>
+        </div>
+      </div>
+
+      <div class="quali-item">
+        <div class="quali-time">32 horas</div>
+        <div>
+          <h3>Front-End Nível Básico — Sistema ESTEAM</h3>
+          <p>Certificação no nível básico de front-end.</p>
+        </div>
+      </div>
+
+    </div>
   </div>
-
-  <div style="margin-top:20px;">
-
-    <div class="BOX card1">
-      <b>Bacharelado em Sistemas de Informação </b> - Uninassau Olinda - cursando
-
-      <div style="font-size:13px; color:#777;">
-        carga horária de 3.200 horas, com foco em lógica de programação e redes.
-      </div>
-    </div>
-
-
-    <div class="BOX card_2">
-      <b>Manutençao de Hardware</b> - Sistema ESTEAM, 32 Horas
-
-      <div style="font-size:13px; color:#777;">
-        Curso focado em manutenção e suporte de hardware e periféricos.
-      </div>
-    </div>
-
-
-    <div class="BOX Card3">
-      <b>Front-End Nível Básico</b> - Sistema ESTEAM, 32 Horas
-
-      <div style="font-size:13px; color:#777;">
-        Certificação no nível básico de front-end.
-      </div>
-    </div>
-
-  </div>
-</div>
-
-
-<!-- DEPOIMENTOS -->
-<div id="depo" class="divzona">
-
-  <h4 style="font-size:26px;">
-    o que falam sobre mim
-  </h4>
-
-  <div style="display:flex; gap:20px; flex-wrap:wrap;">
-
-    <div class="BOX" style="width:280px;">
-      <div style="font-style:italic; color:#333;">
-        "Guilherme é extremamente dedicado e entrega tudo no prazo.
-      </div>
-
-      <div style="margin-top:10px; font-weight:bold;">
-        Galego
-      </div>
-
-      <div style="font-size:13px; color:#888;">
-        gerente de projetos na empresa fictícia TechNova
-      </div>
-    </div>
-
-
-    <div class="BOX" style="width:280px;">
-      <div style="font-style:italic; color:#333;">
-        "trabalhamos juntos em dois projetos e a comunicação dela é excelente,
-        sempre clara nas explicações"
-      </div>
-
-      <div style="margin-top:10px; font-weight:bold;">
-        Ian Medeiros
-      </div>
-
-      <div style="font-size:13px; color:#888;">
-        designer freelancer
-      </div>
-    </div>
-
-
-    <div class="BOX" style="width:280px;">
-      <div style="font-style:italic; color:#333;">
-        "código limpo, bem documentado, e ela sempre pensa em performance
-        desde o início do projeto"
-      </div>
-
-      <div style="margin-top:10px; font-weight:bold;">
-        Vinícius Gaspar
-      </div>
-
-      <div style="font-size:13px; color:#888;">
-        tech lead na empresa fictícia CodeBridge
-      </div>
-    </div>
-
-  </div>
-</div>
-
+</section>
 
 <!-- CONTATO -->
-<div id="contato" class="divzona" style="background:white;">
+<section id="contato" class="pad">
+  <div class="wrap">
+    <div class="section-head"><span class="idx">04</span><h2>Fale comigo</h2></div>
 
-  <div style="font-size:28px; font-weight:bold;">
-    fale comigo
+    <div class="contact-box">
+      <label for="inputNome">Nome</label>
+      <input id="inputNome" type="text">
+
+      <label for="inputEmail">Email</label>
+      <input id="inputEmail" type="email">
+
+      <label for="inputMsg">Mensagem</label>
+      <textarea id="inputMsg"></textarea>
+
+      <button class="btn btn-primary" style="margin-top:20px;" onclick="enviarMensagem()">Enviar mensagem</button>
+      <div class="send-status" id="sendStatus"></div>
+    </div>
   </div>
+</section>
 
-  <div style="max-width:400px; margin-top:20px;">
-
-    nome<br>
-    <input
-      id="inputNome"
-      style="width:100%; padding:8px; margin-bottom:10px;"
-    >
-
-    email<br>
-    <input
-      id="inputEmail"
-      style="width:100%; padding:8px; margin-bottom:10px;"
-    >
-
-    mensagem<br>
-    <textarea
-      id="inputMsg"
-      style="width:100%; padding:8px; margin-bottom:10px; height:80px;">
-    </textarea>
-
-    <button class="botao" onclick="enviarMensagem()">
-      enviar
-    </button>
-
-    <button class="botao" onclick="enviarMensagem()">
-      enviar de novo
-    </button>
-
+<footer>
+  <div class="wrap footer-inner">
+    <p>&copy; Guilherme Lins Guerra — todos os direitos reservados</p>
+    <div class="foot-links">
+      <a href="https://github.com/Guerra2205" target="_blank">GitHub</a>
+      <a href="#" onclick="clicouBotao(event)">LinkedIn</a>
+    </div>
   </div>
-</div>
-
-
-<!-- RODAPÉ -->
-<div class="rodape">
-
-  Copyright Guilherme Lins Guerra todos os direitos reservados
-
-  <div style="margin-top:10px;">
-
-    <a class="botao" href="https://github.com/Guerra2205" target="_blank">
-      github
-    </a>
-
-    <button class="botao" onclick="clicouBotao()">
-      linkedin
-    </button>
-
-  
-
-  </div>
-</div>
-
+</footer>
 
 <script>
-
 function irPara(id) {
-  document.getElementById(id).scrollIntoView({
-    behavior: "smooth"
-  });
+  document.getElementById(id).scrollIntoView({ behavior: "smooth" });
 }
 
-function clicouBotao() {
-  alert("link ainda nao configurado");
+function clicouBotao(e) {
+  if (e) e.preventDefault();
+  alert("link ainda não configurado");
 }
 
 function enviarMensagem() {
+  const nome = document.getElementById("inputNome").value.trim();
+  const email = document.getElementById("inputEmail").value.trim();
+  const mensagem = document.getElementById("inputMsg").value.trim();
+  const status = document.getElementById("sendStatus");
 
-  const nome = document.getElementById("inputNome").value;
-  const email = document.getElementById("inputEmail").value;
-  const mensagem = document.getElementById("inputMsg").value;
+  if (!nome || !email || !mensagem) {
+    status.style.color = "#ff9f45";
+    status.textContent = "Preencha todos os campos antes de enviar.";
+    return;
+  }
 
-  alert(
-    "mensagem enviada por " +
-    nome +
-    ", email " +
-    email +
-    ": " +
-    mensagem
-  );
+  status.style.color = "#5eead4";
+  status.textContent = "Mensagem enviada, " + nome + "! Retorno em breve.";
+  document.getElementById("inputNome").value = "";
+  document.getElementById("inputEmail").value = "";
+  document.getElementById("inputMsg").value = "";
 }
-
 </script>
 
 </body>
